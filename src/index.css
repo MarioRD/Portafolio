@@ -1,0 +1,247 @@
+@import "tailwindcss";
+html, body {
+  overflow-x: hidden;  /* ya lo tienes — quita scroll lateral */
+}
+/* Carrusel de cursos */
+.overflow-x-scroll {
+  overflow-x: scroll;
+  max-width: 100vw;
+}
+
+/* LogoLoop track */
+.logoloop {
+  max-width: 100vw;
+}
+
+
+canvas {
+  max-width: 100vw !important;
+  overflow: hidden;
+}
+.logoloop {
+  overflow: hidden !important;
+  max-width: 100vw;
+}
+/* Ocultar scrollbar vertical en todos los navegadores */
+html {
+  scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;     /* IE / Edge */
+}
+
+html::-webkit-scrollbar {
+  display: none;                /* Chrome / Safari */
+}
+:root {
+  --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --bg-color: #000000;
+  --text-color: #ffffff;
+  --text-secondary: #a1a1a1;
+  --weight-normal: 400;
+  --weight-bold: 700;
+}
+
+[data-theme='light'] {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --text-secondary: #4b4b4b;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+.text-bold  { font-weight: var(--weight-bold); }
+.text-normal { font-weight: var(--weight-normal); }
+
+/* Scroll */
+html, body { overflow-x: hidden; }
+html { scroll-behavior: smooth; }
+
+/* ════════════════════════════════════════════════════
+   HEADER
+   ════════════════════════════════════════════════════ */
+
+.header-root {
+  position: fixed;
+  bottom: 1.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  overflow: visible;
+  animation: header-enter 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes header-enter {
+  from { opacity: 0; transform: translateX(-50%) translateY(24px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.header-glass {
+  width: auto !important;
+  min-width: 200px;
+  padding: 0.5rem 1rem;
+  overflow: visible !important;
+}
+
+.header-glass .glass-surface__content {
+  padding: 0;
+  align-items: flex-end;
+  overflow: visible;
+}
+
+/* ════════════════════════════════════════════════════
+   SKILLS — alineado con el título de courses
+   ════════════════════════════════════════════════════ */
+
+.skills-section {
+  width: 100%;
+  padding: 0;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+}
+
+.skills-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  width: 100%;
+  max-width: min(57rem, calc(100vw - 2rem));
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.skills-title.text-bold {
+  text-align: left;
+  margin-top: 0;
+  font-family: var(--font-main);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 3rem;
+  width: 100%;
+  max-width: min(57rem, calc(100vw - 2rem));
+  background: none;
+  -webkit-text-fill-color: initial;
+}
+
+.card-category {
+  color: var(--text-secondary);
+  font-weight: var(--weight-normal);
+}
+
+.card-title {
+  font-family: var(--font-main);
+  font-weight: var(--weight-bold);
+  color: var(--text-color);
+}
+
+.logos-carousel-placeholder {
+  width: 100%;
+  height: 100px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ════════════════════════════════════════════════════
+   COURSES — responsivo móvil + desktop
+   ════════════════════════════════════════════════════ */
+
+#courses { background: #070707 !important; isolation: isolate; }
+
+#courses .relative.w-full {
+  max-width: 100% !important;
+  margin: 0;
+  overflow: visible;
+}
+
+#courses .flex.w-full.overflow-x-scroll {
+  overflow-x: scroll !important;
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+
+/* ── Padding izquierdo: mínimo en móvil, grande en desktop ── */
+#courses .flex.flex-row.justify-start {
+  padding-left: clamp(1.25rem, 5vw, 10rem) !important;
+  gap: 1rem !important;
+}
+
+/* ── Tarjetas: escalan desde móvil (70vw) hasta desktop (26rem) ── */
+#courses .w-56,
+#courses .md\:w-96 {
+  width: clamp(13rem, 70vw, 26rem) !important;
+}
+
+#courses .h-80,
+#courses .md\:h-\[40rem\] {
+  height: clamp(18rem, 80vw, 42rem) !important;
+}
+
+/* ── Flechas ── */
+#courses .mr-10.flex.justify-end {
+  margin-right: clamp(1rem, 5vw, 5rem) !important;
+  justify-content: flex-end !important;
+  gap: 0.6rem !important;
+  padding-top: 1.5rem !important;
+}
+
+#courses .mr-10.flex.justify-end button {
+  width: clamp(2.5rem, 5vw, 4rem) !important;
+  height: clamp(2.5rem, 5vw, 4rem) !important;
+  border-radius: 50% !important;
+  background: rgba(255,255,255,0.1) !important;
+  border: 1px solid rgba(255,255,255,0.2) !important;
+  backdrop-filter: blur(8px) !important;
+  transition: background 0.2s ease, border-color 0.2s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+#courses .mr-10.flex.justify-end button:hover:not(:disabled) {
+  background: rgba(255,255,255,0.22) !important;
+  border-color: rgba(255,255,255,0.4) !important;
+}
+
+#courses .mr-10.flex.justify-end button:disabled {
+  opacity: 0.2 !important;
+}
+
+/* ── Texto interno de tarjetas ── */
+#courses .relative.z-40 { padding: 1.25rem !important; }
+
+#courses .relative.z-40 p:first-child {
+  font-size: clamp(0.7rem, 2vw, 1.5rem) !important;
+  opacity: 0.55;
+  margin-bottom: 0.3rem;
+  letter-spacing: 0.02em;
+}
+
+#courses .relative.z-40 p:last-child {
+  font-size: clamp(0.9rem, 2.5vw, 1.8rem) !important;
+  line-height: 1.3 !important;
+  margin-top: 0 !important;
+}
+
+/* ── Móvil: py más compacto ── */
+@media (max-width: 640px) {
+  #courses .flex.w-full.overflow-x-scroll {
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+  }
+}

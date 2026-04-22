@@ -1,0 +1,143 @@
+/* ════════════════════════════════════════════════════
+   MAGIC BENTO — Responsivo
+   ════════════════════════════════════════════════════ */
+
+/* ── Desktop (por defecto) ── */
+.card-grid.bento-section {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(9, 1fr);
+  gap: 1.2rem;
+  width: 100%;
+  height: 70vh;
+  margin: 0;
+}
+
+.magic-bento-card:nth-child(1) { grid-column: span 2; grid-row: span 6; }
+.magic-bento-card:nth-child(2) { grid-column: 3;      grid-row: span 3; }
+.magic-bento-card:nth-child(3) { grid-column: 4;      grid-row: span 3; }
+.magic-bento-card:nth-child(4) { grid-column: 1;      grid-row: 7 / span 3; }
+.magic-bento-card:nth-child(5) { grid-column: 2;      grid-row: 7 / span 3; }
+.magic-bento-card:nth-child(6) { grid-column: 3 / span 2; grid-row: 4 / span 3; }
+.magic-bento-card:nth-child(7) { grid-column: 3 / span 2; grid-row: 7 / span 3; }
+
+/* ── Tablet (≤ 900px) ── */
+@media (max-width: 900px) {
+  .card-grid.bento-section {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: none;   /* altura automática por fila */
+    height: auto;
+    gap: 1rem;
+  }
+
+  /* Reset de todas las posiciones explícitas */
+  .magic-bento-card:nth-child(1),
+  .magic-bento-card:nth-child(2),
+  .magic-bento-card:nth-child(3),
+  .magic-bento-card:nth-child(4),
+  .magic-bento-card:nth-child(5),
+  .magic-bento-card:nth-child(6),
+  .magic-bento-card:nth-child(7) {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  /* Primera carta ocupa todo el ancho */
+  .magic-bento-card:nth-child(1) {
+    grid-column: span 2;
+  }
+
+  /* Altura mínima para que las tarjetas no queden enanas */
+  .magic-bento-card {
+    min-height: 140px;
+  }
+}
+
+/* ── Móvil (≤ 480px) ── */
+@media (max-width: 480px) {
+  .card-grid.bento-section {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  /* En móvil todas ocupan el ancho completo */
+  .magic-bento-card:nth-child(1),
+  .magic-bento-card:nth-child(6),
+  .magic-bento-card:nth-child(7) {
+    grid-column: span 1;
+  }
+
+  .magic-bento-card {
+    min-height: 120px;
+  }
+}
+
+/* ════════════════════════════════════════════════════
+   TARJETA BASE
+   ════════════════════════════════════════════════════ */
+
+.magic-bento-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(15px);
+  border-radius: 2em;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 1;
+}
+
+/* ── Texto ── */
+.card-category {
+  display: block;
+  font-family: var(--font-main);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.card-title {
+  font-family: var(--font-main);
+  font-size: 1.1rem;
+  font-weight: var(--weight-bold);
+  color: var(--text-color);
+  margin: 0;
+}
+
+/* ── Efectos de luz ── */
+.magic-bento-card::before,
+.magic-bento-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.magic-bento-card::before {
+  border-radius: inherit;
+  padding: 2px;
+  background: radial-gradient(
+    600px circle at var(--glow-x) var(--glow-y),
+    rgba(255, 255, 255, var(--glow-intensity)),
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: 2;
+}
+
+.magic-bento-card::after {
+  background: radial-gradient(
+    400px circle at var(--glow-x) var(--glow-y),
+    rgba(255, 255, 255, calc(var(--glow-intensity) * 0.05)),
+    transparent 100%
+  );
+  z-index: -1;
+}
